@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * تخليني
      */
     public function index()
     {
