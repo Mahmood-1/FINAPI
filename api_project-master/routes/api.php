@@ -3,11 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\http\Controllers\MyUserController;
-use App\http\Controllers\ActivityController;
-use App\http\Controllers\PostController;
-use App\http\Controllers\GymController;
-use App\http\Controllers\FoodController;
+use App\Http\Controllers\MyUserController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\GymController;
+use App\Http\Controllers\FoodController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
