@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string("title")->required();
             $table->enum('category', ['Health Tips', 'Fitness', 'Audio', 'Video'])->required();
+            $table->enum('gender', ['male', 'female'])->required();
             $table->text("body")->required();
             $table->string("image")->nullable();
             $table->string("video")->nullable();
+            $table->string("youtube")->nullable();
             $table->string("audio")->nullable();
             $table->timestamps();
 

@@ -21,6 +21,6 @@ class Controller extends BaseController
     public function image_upload($image, $dir) {
 		$name = time() . '.' . $image->getClientOriginalName();
 		$image->move(public_path('images' . DIRECTORY_SEPARATOR . $dir), $name);
-		return $name;
+		return $dir . DIRECTORY_SEPARATOR . $name;
     }
 }

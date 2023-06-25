@@ -26,6 +26,9 @@ class User extends Authenticatable
         'weight',
         'location',
         'password',
+        'image',
+        'gender',
+        'fcm_token',
     ];
 
     /**

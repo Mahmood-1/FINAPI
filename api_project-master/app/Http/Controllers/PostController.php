@@ -9,11 +9,17 @@ use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 {
     /**
-     * تخليني
+     * Display a listing of the resource.
      */
     public function index()
     {
         $posts = post::all();
+        return parent::success($post);
+    }
+
+    public function get_by_gender($gender)
+    {
+        $post = post::where('gender', $gender)->get();
         return parent::success($post);
     }
 
@@ -133,7 +139,7 @@ class PostController extends Controller
     {
         try {
             $post = post::findOrFail($id);
-            $post->destroy();
+            $post->destroy($id);
             return parent::success("Post $post->title Deleted Successfully");
         } catch (\Exception) {
             return parent::error('Post Not Found');

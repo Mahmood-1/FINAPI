@@ -15,6 +15,8 @@ class post extends Model
         'image',
         'video',
         'audio',
-        'category'
+        'category',
+        'gender',
+        'youtube',
     ];
 }

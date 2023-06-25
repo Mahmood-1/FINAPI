@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
             $table->string('location')->nullable();
+            $table->enum('gender', ['male', 'female'])->required()->default('male');
+            $table->text('fcm_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
