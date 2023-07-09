@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,9 +8,15 @@ class FoodMeal extends Model
 {
     use HasFactory;
 
-    public $table = 'food_meals';
+    protected $fillable = [
+        'name',
+        'image',
+        'desc',
+        'food_id'
+    ];
 
-    public function food() {
-        return $this->belongsTo(Food::class);
+    public function food()
+    {
+        return $this->belongsTo(Food::class, 'food_id');
     }
 }

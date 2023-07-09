@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ActivityController extends Controller
 {

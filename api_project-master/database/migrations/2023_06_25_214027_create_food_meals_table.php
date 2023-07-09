@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name')->required();
             $table->string('image')->required();
             $table->string('desc');
-            $table->foreign('food_id')->references('id')->on('foods');
+            $table->foreign('food_id')->references('id')->on('Foods');
             $table->timestamps();
         });
     }

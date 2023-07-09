@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\dashboard;
 
+use App\Http\Controllers\Controller;
 use App\Models\Food;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +18,18 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $food = Food::all()->with('meals')->get();
-        return parent::success($food);
+        $food = Food::all();
+        return view('dashboard.pages.foods.index', [
+            'foods' => $food,
+        ]);
+
+    }
+
+    public function index2()
+    {
+        return view('dashboard.dashboard');
+
+
     }
 
     /**
@@ -24,7 +37,8 @@ class FoodController extends Controller
      */
     public function create()
     {
-        //
+        $foods=new Food();
+        return view('dashboard.pages.foods.create',compact(['foods']));
     }
 
     /**
@@ -43,30 +57,24 @@ class FoodController extends Controller
             return parent::error($validation->errors());
         }
 
-        // Upload Images
-        if ($request->file('photo') != null) {
-            $request['image'] = parent::image_upload($request->file('photo'), 'food');
-        }
-        $food = new Food();
-        $food->fill($request->all());
-        $result = $food->save();
-        if ( $result == 1) {
-            return parent::success($food, 201);
-        } else {
-            return parent::error('Something Went Wrong!!');
-        }
+        $data = $request->except('image');
+        $data['image'] = $this->uploadImages($request, 'image');
+
+
+        $foods = Food::create($data);
+
+        return redirect()->route('food.index')->with('success', 'Food Created!');
+
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show($id)
     {
         try {
             $food = Food::findOrFail($id)->with('meals')->get();
             return parent::success($food);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+
             return parent::error('Food Not Found!');
         }
     }
@@ -74,14 +82,20 @@ class FoodController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Gym $gym)
+    public function edit($id)
     {
-        //
+        try {
+            $foods=Food::findOrFail($id);
+        } catch (\Exception $e){
+            return Redirect::route('foods.index')
+                ->with('info','Record is  not  Fount !');
+
+        }
+
+        return view('dashboard.pages.foods.edit',compact(['foods']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, $id)
     {
         $rules = [
@@ -95,33 +109,47 @@ class FoodController extends Controller
             return parent::error($validation->errors());
         }
 
-        if ($request->file('photo') != null) {
-            $request['image'] = parent::image_upload($request->file('photo'), 'food');
+        $foods = Food::findOrFail($id);
+        $date = $request->except('image');
+
+        $old_image =$foods->image;
+        $new_image = $this->uploadImages($request, 'image');
+        if ($new_image) {
+            $date['image'] = $new_image;
+        } else {
+            $date['image'] = $old_image;
         }
 
-        try {
-            $food = Food::findOrFail($id);
-            $food->fill($request->all());
-            $food->update();
-            return parent::success($gym);
-        } catch (\Exception) {
-            return parent::error('Food Not Found');
+        $foods->update($date);
+
+        if ($old_image && $new_image) {
+            Storage::disk('public')->delete($old_image);
         }
+        return redirect()->route('food.index')->with('success', 'Foods Updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy($id)
     {
         try {
             $food = Food::findOrFail($id);
             $food->destroy($id);
-            return parent::success("Gym $food->title Deleted Successfully");
+            return Redirect::route('food.index')
+                ->with('wring','foods deleted !');
+
         } catch (\Exception) {
             return parent::error('Food Not Found');
         }
     }
+         public function uploadImages(Request $request, $fieldName){
+             if (!$request->hasFile($fieldName)) {
+                 return;
+             }
+             $file = $request->file($fieldName);
+             $path = $file->store('uploads', ['disk' => 'public']);
+             return Storage::url($path);
+         }
+
 
     public function add_meals(Request $request, $food_id)
     {
@@ -151,8 +179,9 @@ class FoodController extends Controller
 
             return parent::success("Food $food->title Meal Added Successfully");
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return parent::error('Food Not Found');
         }
     }
+
+
 }

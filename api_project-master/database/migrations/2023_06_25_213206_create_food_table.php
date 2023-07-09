@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('foods', function (Blueprint $table) {
+        Schema::create('Foods', function (Blueprint $table) {
             $table->id();
             $table->string('name')->required();
             $table->string('image')->required();

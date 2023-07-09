@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = post::all();
-        return parent::success($post);
+        return parent::success($posts);
     }
 
     public function get_by_gender($gender)
@@ -37,12 +37,9 @@ class PostController extends Controller
   public function store(Request $request)
     {
         $rules = [
-            'title' => 'required|min:8|max:128',
-            'body' => 'required|min:8|max:128',
-            'video' => 'mimes:mp4',
-            'audio' => 'mimes:mp3',
-            'photo' => 'required|mimes:jpg,png,jpeg,gif,svg',
-            'category' => 'required'
+            'title' => 'required',
+            'gender' => 'required|in:male,female',
+            'youtube' => 'required',
         ];
 
         $validation = Validator::make($request->all(), $rules);
@@ -61,7 +58,7 @@ class PostController extends Controller
         if ($request->file('sound') != null) {
             $request['audio'] = parent::image_upload($request->file('sound'), 'posts');
         }
-        
+
         $post->fill($request->all());
         $result = $post->save();
 

@@ -43,16 +43,6 @@ class MyUserController extends Controller
         return parent::error('Can not login', 403);
     }
 
-    public function login2(Request $request)
-    {
-
-        return view('dashboard.auth.login');
-    }
-    public function ac_login(Request $request)
-    {
-
-        return view('dashboard.dashboard');
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -197,7 +187,7 @@ class MyUserController extends Controller
             ]);
             return parent::success('Password Reset Successfully - Check You Email');
         } catch (\Exception $e) {
-
+            dd($e->getMessage());
             return parent::error('User Not Found!!');
         }
     }

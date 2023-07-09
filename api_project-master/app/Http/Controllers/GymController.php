@@ -152,9 +152,11 @@ class GymController extends Controller
                 'gym_id' => $gym_id,
             ]);
 
+
+
+
             return parent::success("Gym $gym->title Price Added Successfully");
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return parent::error('Gym Not Found');
         }
     }

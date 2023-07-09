@@ -16,7 +16,5 @@ class Food extends Model
         'desc',
     ];
 
-    public function meals() {
-        return $this->hasMany(FoodMeal::class);
-    }
+
 }
