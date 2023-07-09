@@ -12,7 +12,7 @@
               enctype="multipart/form-data">
             @csrf
             @method('put')
-            @include('dashboard.pages.Foods._form',[
+            @include('dashboard.pages.foods._form',[
             'button_label'=>'Update'
     ])
         </form>
