@@ -11,11 +11,7 @@ class post extends Model
 
     public $fillable = [
         'title',
-        'body',
-        'image',
-        'video',
-        'audio',
-        'category',
+
         'gender',
         'youtube',
     ];
