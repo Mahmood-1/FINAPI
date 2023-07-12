@@ -37,8 +37,8 @@ class MyUserController extends Controller
         $result = auth()->attempt(['email' => $email, 'password' => $password]);
         if ($result) {
             $user = User::find(auth()->user()->id);
-            $token = $user->createToken('android')->accessToken;
-            return parent::success($token);
+            // $token = $user->createToken('android')->accessToken;
+            return parent::success($user);
         }
         return parent::error('Can not login', 403);
     }

@@ -15,7 +15,8 @@ class GymController extends Controller
      */
     public function index()
     {
-        $gym = Gym::all()->with('prices')->get();
+        // $gym = Gym::all()->with('prices')->get();
+        $gym = Gym::all();
         return parent::success($gym);
     }
 

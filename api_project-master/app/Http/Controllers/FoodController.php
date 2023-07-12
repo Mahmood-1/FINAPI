@@ -15,7 +15,7 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $food = Food::all()->with('meals')->get();
+        $food = Food::all();
         return parent::success($food);
     }
 

@@ -3,9 +3,9 @@
         Dashboard
     </x-slot>
     <x-slot name="pageTitle2">
-        foodM
+        Food Meals
     </x-slot>
-<x-alert/>
+    <x-alert />
 
     <div class="container-fluid py-4">
 
@@ -14,7 +14,7 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-info shadow-info border-radius-lg pt-4 pb-3 d-flex justify-content-between">
-                            <h6 class="text-white text-capitalize ps-3">foodM table</h6>
+                            <h6 class="text-white text-capitalize ps-3">Food Meals table</h6>
                             <a href="{{route('foodM.create')}}" class="btn btn-sm btn-info mx-3">Create</a>
                         </div>
                     </div>
@@ -23,16 +23,14 @@
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">FoodM title</th>
-{{--                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Food Owners Name </th>--}}
-{{--                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">price</th>--}}
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Food Nmae</th>
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">FoodM title</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Food Nmae</th>
+                                        <th class="text-secondary opacity-7"></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($foodM as $foodMs)
+                                    @foreach($foodM as $foodMs)
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
@@ -41,7 +39,6 @@
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $foodMs->name }}</h6>
-{{--                                                    <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>--}}
                                                 </div>
                                             </div>
                                         </td>
@@ -51,7 +48,7 @@
                                         </td>
 
                                         <td class="align-middle">
-                                            <a href="{{Route('foodM.edit',$foodMs->id)}}"   class="btn btn-sm btn-outline-warning"><i style="color: orange"  class="fas fa-edit"></i></a>
+                                            <a href="{{Route('foodM.edit',$foodMs->id)}}" class="btn btn-sm btn-outline-warning"><i style="color: orange" class="fas fa-edit"></i></a>
 
                                         </td>
                                         <td class="align-middle">
@@ -62,13 +59,8 @@
                                             </form>
 
                                         </td>
-{{--                                        <td class="align-middle">--}}
-{{--                                            <a href="#" class="text-secondary font-weight-bold text-xs edit-service" data-id="{{$gyms->id }}" data-toggle="modal" data-target="#edit-service-modal">--}}
-{{--                                                Edit--}}
-{{--                                            </a>--}}
-{{--                                        </td>--}}
                                     </tr>
-                                @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -111,8 +103,4 @@
             </div>
         </footer>
     </div>
-
-
-
-{{--{{$categories->withQueryString()->appends(['search'=>1])->links()}}--}}
 </x-Dashboard-layout>

@@ -49,15 +49,6 @@ class PostController extends Controller
 
         $post = new post();
 
-        if ($request->file('photo') != null) {
-            $request['image'] = parent::image_upload($request->file('photo'), 'users');
-        }
-        if ($request->file('show') != null) {
-            $request['video'] = parent::image_upload($request->file('video'), 'posts');
-        }
-        if ($request->file('sound') != null) {
-            $request['audio'] = parent::image_upload($request->file('sound'), 'posts');
-        }
 
         $post->fill($request->all());
         $result = $post->save();

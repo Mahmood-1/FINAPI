@@ -8,7 +8,7 @@
     {{--        success message--}}
     <x-alert/>
     <div style="display: flex; justify-content: center;">
-        <form style="width:65%" action="{{route('fitness.update',$post->id)}}" method="post"
+        <form style="width:65%" action="{{route('foodM.update',$post->id)}}" method="post"
               enctype="multipart/form-data">
             @csrf
             @method('put')
